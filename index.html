@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Portfolio van David van Groningen - Software Developer in opleiding, gespecialiseerd in fullstack development met React, PHP, en moderne web technologieën." />
+    <meta name="keywords" content="David van Groningen, Software Developer, Portfolio, React, PHP, Fullstack, Web Development" />
+    <meta name="author" content="David van Groningen" />
+    
+    <!-- Open Graph Meta Tags (Social Media) -->
+    <meta property="og:title" content="David van Groningen - Software Developer Portfolio" />
+    <meta property="og:description" content="Bekijk mijn portfolio als Software Developer in opleiding, gespecialiseerd in fullstack development." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jouwdomein.nl" />
+    <meta property="og:image" content="/David.jpg" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="David van Groningen - Portfolio" />
+    <meta name="twitter:description" content="Software Developer in opleiding, gespecialiseerd in fullstack development." />
+    <meta name="twitter:image" content="/David.jpg" />
+    
+    <!-- Theme Color voor mobiele browsers -->
+    <meta name="theme-color" content="#667eea" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    
+    <!-- Manifest voor PWA ondersteuning -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Preconnect voor externe resources (als je die gebruikt) -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" /> -->
+    
+    <title>David van Groningen - Portfolio</title>
+    
+    <!-- Inline kritische CSS om FOUC te voorkomen -->
+    <style>
+      /* Voorkom Flash of Unstyled Content */
+      body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        background: #667eea;
+      }
+      
+      #root {
+        min-height: 100vh;
+      }
+      
+      /* Loading spinner styling */
+      .initial-loader {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+      }
+      
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+      
+      /* Dark mode support */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #0f172a;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Noscript fallback -->
+    <noscript>
+      <div style="text-align: center; padding: 50px; font-family: sans-serif;">
+        <h1>JavaScript is vereist</h1>
+        <p>Deze website vereist JavaScript om te functioneren. Schakel JavaScript in om de website te bekijken.</p>
+      </div>
+    </noscript>
+    
+    <!-- Initial loading indicator -->
+    <div id="initial-loader" class="initial-loader">
+      <div class="spinner" role="status" aria-label="Laden..."></div>
+    </div>
+    
+    <div id="root"></div>
+    
+    <!-- Main script -->
+    <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- Verwijder loader zodra React is geladen -->
+    <script>
+      window.addEventListener('load', function() {
+        const loader = document.getElementById('initial-loader');
+        if (loader) {
+          loader.style.opacity = '0';
+          loader.style.transition = 'opacity 0.3s ease';
+          setTimeout(() => loader.remove(), 300);
+        }
+      });
+    </script>
+  </body>
+</html>

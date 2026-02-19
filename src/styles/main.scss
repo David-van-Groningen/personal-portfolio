@@ -1,515 +1,275 @@
-// VARIABLES - PURPLE & WHITE THEME
+// ─── VARIABLES ──────────────────────────────────────────────────────────────
 
-$primary-purple: #8b5cf6;
-$secondary-purple: #a78bfa;
-$dark-purple: #6d28d9;
-$light-purple: #c4b5fd;
-$accent-purple: #7c3aed;
-$pink: #ec4899;
-$cyan: #06b6d4;
-$orange: #f97316;
-$green: #10b981;
+$bg:          #0a0a0f;
+$surface:     #111118;
+$surface-2:   #18181f;
+$violet:      #7c3aed;
+$violet-mid:  #9055f0;
+$violet-light:#b78ff5;
+$violet-pale: #e2d4fc;
+$pink:        #e040c8;
+$cyan:        #22d3ee;
+$amber:       #f59e0b;
+$green:       #34d399;
+$text:        #f0edf8;
+$muted:       #8b859e;
+$dim:         #3a3549;
 
-$white: #ffffff;
-$off-white: #f8fafc;
-$light-gray: #e2e8f0;
-$text-gray: #cbd5e1;
+$mobile:  480px;
+$tablet:  768px;
+$desktop: 1024px;
 
-$dark-bg: #0f0a1e;
-$card-bg: rgba(255, 255, 255, 0.95);
-$linkedin-color: #0077b5;
-$github-color: #24292e;
+// ─── FONTS ───────────────────────────────────────────────────────────────────
 
-// Breakpoints
-$mobile: 480px;
-$tablet: 768px;
-$desktop: 968px;
-$large: 1200px;
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
 
-// RESET & BASE
-* {
+// ─── RESET ───────────────────────────────────────────────────────────────────
+
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 
-    'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  background: $bg;
+  color: $text;
+  font-family: 'DM Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
-// PORTFOLIO COMPONENT
+// ─── PORTFOLIO ───────────────────────────────────────────────────────────────
+
 .portfolio {
   min-height: 100vh;
   position: relative;
-  padding: 2rem 1rem;
-  background: linear-gradient(135deg, $dark-bg 0%, #1a0f33 50%, $dark-bg 100%);
 
-  @media (min-width: $tablet) {
-    padding: 3rem 1rem;
-  }
-
-  // Animated background orbs
-  &__background {
+  // Subtle noise texture overlay
+  &__noise {
+    pointer-events: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+    inset: 0;
     z-index: 0;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
   }
 
-  &__orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.3;
-    animation: float 20s infinite ease-in-out;
-
-    &--1 {
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, $primary-purple, transparent);
-      top: -150px;
-      left: -150px;
-      animation-delay: 0s;
-
-      @media (min-width: $tablet) {
-        width: 500px;
-        height: 500px;
-        top: -200px;
-        left: -200px;
-      }
-    }
-
-    &--2 {
-      width: 250px;
-      height: 250px;
-      background: radial-gradient(circle, $accent-purple, transparent);
-      bottom: -100px;
-      right: -100px;
-      animation-delay: 7s;
-
-      @media (min-width: $tablet) {
-        width: 400px;
-        height: 400px;
-        bottom: -150px;
-        right: -150px;
-      }
-    }
-
-    &--3 {
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle, $secondary-purple, transparent);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      animation-delay: 14s;
-
-      @media (min-width: $tablet) {
-        width: 350px;
-        height: 350px;
-      }
-    }
+  // Faint grid lines
+  &__grid-bg {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-image:
+      linear-gradient(rgba($violet, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba($violet, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
   }
 
   &__container {
-    max-width: 1200px;
-    margin: 0 auto;
     position: relative;
     z-index: 1;
-  }
-
-  &__card {
-    background: $card-bg;
-    backdrop-filter: blur(20px);
-    border-radius: 1.5rem;
-    padding: 1.5rem;
-    box-shadow: 0 20px 60px rgba(139, 92, 246, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
 
     @media (min-width: $tablet) {
-      border-radius: 2rem;
-      padding: 2.5rem;
+      padding: 5rem 2.5rem 6rem;
     }
-
     @media (min-width: $desktop) {
-      padding: 3rem;
-    }
-
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 30px 80px rgba(139, 92, 246, 0.3);
+      padding: 6rem 3rem 8rem;
     }
   }
 
-  // HEADER SECTION
-  &__header {
+  // ─── HERO ────────────────────────────────────────────────────────────────
+
+  &__hero {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-bottom: 5rem;
+
+    @media (max-width: $tablet) {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      padding-bottom: 3.5rem;
+    }
+  }
+
+  &__hero-left {
+    flex: 1;
+    padding-top: 0.5rem;
+  }
+
+  &__label {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $violet-light;
+    margin-bottom: 1.25rem;
+  }
+
+  &__name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    line-height: 0.95;
+    margin-bottom: 1.75rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    position: relative;
-    text-align: center;
 
-    @media (min-width: $tablet) {
-      flex-direction: row;
-      gap: 3rem;
-      margin-bottom: 3rem;
-      padding-bottom: 3rem;
-      text-align: left;
+    &-first {
+      font-size: clamp(4.5rem, 12vw, 9rem);
+      color: $text;
     }
 
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, $primary-purple, transparent);
-
-      @media (min-width: $tablet) {
-        width: 80%;
-      }
+    &-last {
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      color: $muted;
     }
   }
 
-  &__avatar-wrapper {
-    position: relative;
+  &__role {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba($violet, 0.15);
+    color: $violet-light;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+
+    svg {
+      flex-shrink: 0;
+      color: $violet-mid;
+    }
+  }
+
+  &__hero-right {
     flex-shrink: 0;
+    position: relative;
   }
 
   &__avatar {
     position: relative;
-    width: 140px;
-    height: 140px;
+    width: 160px;
+    height: 160px;
 
     @media (min-width: $tablet) {
-      width: 180px;
-      height: 180px;
+      width: 220px;
+      height: 220px;
+    }
+    @media (min-width: $desktop) {
+      width: 260px;
+      height: 260px;
     }
   }
 
   &__avatar-img {
-    position: relative;
     width: 100%;
     height: 100%;
-    border-radius: 50%;
+    border-radius: 1.5rem;
     object-fit: cover;
-    z-index: 2;
-    box-shadow: 
-      0 10px 40px rgba(139, 92, 246, 0.4),
-      inset 0 2px 10px rgba(0, 0, 0, 0.1);
-    border: 3px solid white;
-
-    @media (min-width: $tablet) {
-      border: 4px solid white;
-    }
-  }
-
-  &__avatar-ring {
-    position: absolute;
-    top: -8px;
-    left: -8px;
-    right: -8px;
-    bottom: -8px;
-    border-radius: 50%;
-    background: linear-gradient(45deg, $primary-purple, $pink, $cyan, $secondary-purple);
-    background-size: 300% 300%;
-    animation: gradient-rotate 8s linear infinite;
-    opacity: 0.6;
-    filter: blur(2px);
-
-    @media (min-width: $tablet) {
-      top: -10px;
-      left: -10px;
-      right: -10px;
-      bottom: -10px;
-    }
-  }
-
-  &__header-content {
-    flex: 1;
-    width: 100%;
-  }
-
-  &__name-wrapper {
-    margin-bottom: 1.25rem;
-
-    @media (min-width: $tablet) {
-      margin-bottom: 1.5rem;
-    }
-  }
-
-  &__name {
-    font-size: 2rem;
-    font-weight: 900;
-    background: linear-gradient(135deg, $dark-purple, $primary-purple);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 1rem;
-    line-height: 1.3;
-    padding-bottom: 0.25rem;
-
-    @media (min-width: $mobile) {
-      font-size: 2.5rem;
-    }
-
-    @media (min-width: $tablet) {
-      font-size: 3rem;
-    }
-
-    @media (min-width: $desktop) {
-      font-size: 3.5rem;
-    }
-  }
-
-  &__title-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: linear-gradient(135deg, $primary-purple, $accent-purple);
-    color: white;
-    padding: 0.6rem 1.25rem;
-    border-radius: 2rem;
-    font-size: 0.875rem;
-    font-weight: 600;
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
-
-    @media (min-width: $mobile) {
-      font-size: 0.9375rem;
-      padding: 0.65rem 1.35rem;
-    }
-
-    @media (min-width: $tablet) {
-      gap: 0.75rem;
-      font-size: 1rem;
-      padding: 0.7rem 1.4rem;
-    }
-
-    @media (min-width: $desktop) {
-      font-size: 1.125rem;
-      padding: 0.75rem 1.5rem;
-    }
-  }
-
-  &__title-icon {
-    flex-shrink: 0;
-  }
-
-  &__buttons {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    @media (min-width: $tablet) {
-      gap: 1rem;
-      justify-content: flex-start;
-    }
-  }
-
-  &__button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    font-size: 0.9375rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
     position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-
-    @media (min-width: $mobile) {
-      padding: 0.85rem 1.5rem;
-      font-size: 1rem;
-      border-radius: 1rem;
-    }
-
-    @media (min-width: $tablet) {
-      gap: 0.75rem;
-      padding: 1rem 2rem;
-    }
-
-    span {
-      position: relative;
-      z-index: 1;
-    }
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.5s;
-    }
-
-    &:hover::before {
-      left: 100%;
-    }
-
-    &--linkedin {
-      background: $linkedin-color;
-      color: white;
-      box-shadow: 0 4px 15px rgba(0, 119, 181, 0.3);
-
-      &:hover {
-        background: darken($linkedin-color, 8%);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0, 119, 181, 0.4);
-      }
-    }
-
-    &--github {
-      background: $github-color;
-      color: white;
-      box-shadow: 0 4px 15px rgba(36, 41, 46, 0.3);
-
-      &:hover {
-        background: lighten($github-color, 10%);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(36, 41, 46, 0.4);
-      }
-    }
+    z-index: 1;
+    filter: saturate(0.9);
   }
 
-  // SECTIONS - MINIMAL BORDERS
-  &__section {
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.03), rgba(167, 139, 250, 0.03));
-    border-radius: 1.25rem;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    transition: all 0.3s ease;
-
-    @media (min-width: $tablet) {
-      border-radius: 1.5rem;
-      padding: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    &:hover {
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.06), rgba(167, 139, 250, 0.06));
-      box-shadow: 0 8px 30px rgba(139, 92, 246, 0.1);
-    }
-
-    &--about {
-      background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(167, 139, 250, 0.05));
-    }
-
-    &--contact {
-      background: linear-gradient(135deg, $primary-purple, $accent-purple);
-      color: white;
-
-      .portfolio__section-title,
-      .portfolio__section-header svg {
-        color: white;
-      }
-    }
-
-    &--games,
-    &--sports {
-      background: white;
-      box-shadow: 0 4px 20px rgba(139, 92, 246, 0.08);
-    }
+  &__avatar-glow {
+    position: absolute;
+    inset: -2px;
+    border-radius: 1.75rem;
+    background: linear-gradient(135deg, $violet, $pink, $cyan);
+    z-index: 0;
+    opacity: 0.6;
+    filter: blur(12px);
+    animation: glow-pulse 4s ease-in-out infinite;
   }
 
-  &__section-header {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1.25rem;
-
-    @media (min-width: $tablet) {
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-  }
-
-  &__section-icon {
-    color: $primary-purple;
-    flex-shrink: 0;
-
-    @media (max-width: $mobile) {
-      width: 24px;
-      height: 24px;
-    }
-  }
+  // ─── SECTION COMMONS ─────────────────────────────────────────────────────
 
   &__section-title {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: $dark-purple;
-    margin: 0;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    color: $text;
+    margin-bottom: 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
 
-    @media (min-width: $tablet) {
-      font-size: 1.75rem;
-    }
-
-    @media (min-width: $desktop) {
-      font-size: 2rem;
+    svg {
+      color: $violet-mid;
+      flex-shrink: 0;
     }
   }
 
-  &__section-content {
-    color: #334155;
+  &__about-marker {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: $dim;
+    margin-bottom: 1rem;
+  }
+
+  // ─── ABOUT ───────────────────────────────────────────────────────────────
+
+  &__about {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 0 2rem;
+    padding-bottom: 5rem;
+
+    @media (max-width: $mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__about-body {
+    // empty, just for structure
+  }
+
+  &__about-lead {
+    font-size: clamp(1.1rem, 2.5vw, 1.375rem);
+    font-weight: 400;
+    line-height: 1.75;
+    color: $text;
+    margin-bottom: 1.25rem;
+
+    em {
+      font-style: normal;
+      color: $violet-light;
+    }
+  }
+
+  &__about-sub {
     font-size: 1rem;
-    line-height: 1.7;
+    line-height: 1.8;
+    color: $muted;
 
-    @media (min-width: $tablet) {
-      font-size: 1.0625rem;
-      line-height: 1.75;
-    }
-
-    @media (min-width: $desktop) {
-      font-size: 1.125rem;
-      line-height: 1.8;
-    }
-
-    p {
-      margin-bottom: 1rem;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    strong {
-      color: $dark-purple;
-      font-weight: 700;
+    em {
+      font-style: normal;
+      color: $violet-light;
     }
   }
 
-  &__intro {
-    font-size: 1.0625rem;
-    font-weight: 500;
-    color: #1e293b;
+  // ─── TRAITS ──────────────────────────────────────────────────────────────
 
-    @media (min-width: $tablet) {
-      font-size: 1.125rem;
-    }
-
-    @media (min-width: $desktop) {
-      font-size: 1.25rem;
-    }
+  &__traits-section {
+    padding-bottom: 5rem;
   }
 
-  // TRAITS - COLOR CHANGING ON HOVER
+  &__traits-header {
+    // marker + title stacked
+  }
+
   &__traits {
     display: flex;
     flex-wrap: wrap;
@@ -518,430 +278,256 @@ body {
     @media (min-width: $tablet) {
       gap: 0.75rem;
     }
-
-    @media (min-width: $desktop) {
-      gap: 1rem;
-    }
   }
 
-  &__trait-badge {
-    position: relative;
-    background: linear-gradient(135deg, $primary-purple, $accent-purple);
-    color: white;
-    padding: 0.625rem 1.125rem;
-    border-radius: 2rem;
+  &__trait {
+    font-family: 'DM Sans', sans-serif;
     font-size: 0.875rem;
-    font-weight: 600;
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
-    transition: all 0.5s ease;
-    cursor: pointer;
-    overflow: hidden;
-    background-size: 200% 200%;
+    font-weight: 500;
+    color: $violet-pale;
+    background: rgba($violet, 0.12);
+    padding: 0.5rem 1.125rem;
+    border-radius: 2rem;
+    cursor: default;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.25s ease;
 
     @media (min-width: $tablet) {
-      padding: 0.75rem 1.25rem;
       font-size: 0.9375rem;
+      padding: 0.5625rem 1.25rem;
     }
 
-    @media (min-width: $desktop) {
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-    }
-
-    // Multi-color gradient animation on hover
-    &:hover {
-      animation: gradient-shift 1.5s ease infinite;
-      box-shadow: 
-        0 6px 20px rgba(139, 92, 246, 0.4),
-        0 0 30px rgba(236, 72, 153, 0.3),
-        0 0 40px rgba(6, 182, 212, 0.2);
-      transform: translateY(-2px);
-    }
-
-    // Rainbow gradient for hover effect
-    &:nth-child(1):hover {
-      background: linear-gradient(135deg, $primary-purple, $pink, $cyan);
-      background-size: 300% 300%;
-    }
-
-    &:nth-child(2):hover {
-      background: linear-gradient(135deg, $pink, $orange, $primary-purple);
-      background-size: 300% 300%;
-    }
-
-    &:nth-child(3):hover {
-      background: linear-gradient(135deg, $cyan, $green, $primary-purple);
-      background-size: 300% 300%;
-    }
-
-    &:nth-child(4):hover {
-      background: linear-gradient(135deg, $orange, $pink, $accent-purple);
-      background-size: 300% 300%;
-    }
-
-    &:nth-child(5):hover {
-      background: linear-gradient(135deg, $green, $cyan, $secondary-purple);
-      background-size: 300% 300%;
-    }
-
-    &:nth-child(6):hover {
-      background: linear-gradient(135deg, $accent-purple, $orange, $pink);
-      background-size: 300% 300%;
-    }
-
-    &:nth-child(7):hover {
-      background: linear-gradient(135deg, $secondary-purple, $green, $cyan);
-      background-size: 300% 300%;
-    }
-
-    &:nth-child(8):hover {
-      background: linear-gradient(135deg, $pink, $primary-purple, $orange);
-      background-size: 300% 300%;
-    }
-
-    &:nth-child(9):hover {
-      background: linear-gradient(135deg, $primary-purple, $pink, $cyan);
-      background-size: 300% 300%;
-    }
-
-    &:nth-child(10):hover {
-      background: linear-gradient(135deg, $pink, $orange, $primary-purple);
-      background-size: 300% 300%;
-    }
-
-    &:nth-child(11):hover {
-      background: linear-gradient(135deg, $cyan, $green, $primary-purple);
-      background-size: 300% 300%;
-    }
-
-    &:nth-child(12):hover {
-      background: linear-gradient(135deg, $orange, $pink, $accent-purple);
-      background-size: 300% 300%;
-    }
-
-    &:nth-child(13):hover {
-      background: linear-gradient(135deg, $green, $cyan, $secondary-purple);
-      background-size: 300% 300%;
-    }
+    // Cycle through accent colors on hover
+    &:nth-child(3n+1):hover  { background: rgba($violet, 0.28); color: #d8baff; }
+    &:nth-child(3n+2):hover  { background: rgba($pink, 0.22);   color: #f8bdf0; }
+    &:nth-child(3n+3):hover  { background: rgba($cyan, 0.18);   color: #a5f3fd; }
   }
 
-  // GRID LAYOUT
-  &__grid {
+  // ─── COLUMNS ─────────────────────────────────────────────────────────────
+
+  &__columns {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
+    gap: 4rem 3rem;
+    padding-bottom: 5rem;
 
     @media (min-width: $desktop) {
       grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-bottom: 2rem;
     }
   }
 
-  // GAMES LIST
-  &__list {
+  // ─── GAMES ───────────────────────────────────────────────────────────────
+
+  &__games-list {
     list-style: none;
-    color: #334155;
   }
 
-  &__list-item {
+  &__games-item {
     display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.875rem;
-    margin-bottom: 0.625rem;
-    background: $off-white;
-    border-radius: 0.75rem;
-    transition: all 0.3s ease;
-    font-weight: 500;
-    font-size: 0.9375rem;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.875rem 0;
+    color: $muted;
+    font-size: 1rem;
+    font-weight: 400;
+    transition: color 0.2s ease, transform 0.2s ease;
+    border-bottom: 1px solid rgba($dim, 0.5);
 
-    @media (min-width: $tablet) {
-      gap: 1rem;
-      padding: 1rem;
-      margin-bottom: 0.75rem;
-      font-size: 1rem;
+    &:first-child {
+      border-top: 1px solid rgba($dim, 0.5);
     }
 
     &:hover {
-      background: lighten($light-purple, 15%);
-      transform: translateX(8px);
-      box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+      color: $text;
+      transform: translateX(6px);
+
+      .portfolio__games-num {
+        color: $violet-mid;
+      }
     }
   }
 
-  &__list-icon {
-    font-size: 1.25rem;
+  &__games-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: $dim;
     flex-shrink: 0;
-
-    @media (min-width: $tablet) {
-      font-size: 1.5rem;
-    }
+    letter-spacing: 0.05em;
+    transition: color 0.2s ease;
   }
 
-  // SPORTS SECTION
-  &__sports-grid {
-    margin-bottom: 1.25rem;
-
-    @media (min-width: $tablet) {
-      margin-bottom: 1.5rem;
-    }
-  }
+  // ─── SPORTS ──────────────────────────────────────────────────────────────
 
   &__sport-card {
     display: flex;
     align-items: center;
     gap: 1.25rem;
-    padding: 1.25rem;
-    background: linear-gradient(135deg, $light-purple, lighten($light-purple, 10%));
-    border-radius: 1rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
-
-    @media (min-width: $tablet) {
-      gap: 1.5rem;
-      padding: 1.5rem;
-    }
+    background: $surface-2;
+    padding: 1.25rem 1.5rem;
+    border-radius: 1.25rem;
+    margin-bottom: 1.25rem;
+    transition: transform 0.3s ease, background 0.3s ease;
 
     &:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 8px 30px rgba(139, 92, 246, 0.3);
+      background: darken($surface-2, 2%);
+      transform: translateY(-3px);
     }
   }
 
   &__sport-icon {
-    font-size: 2.5rem;
-    background: white;
-    width: 65px;
-    height: 65px;
+    font-size: 2.25rem;
+    background: rgba($violet, 0.15);
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 1rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     flex-shrink: 0;
-
-    @media (min-width: $tablet) {
-      font-size: 3rem;
-      width: 75px;
-      height: 75px;
-    }
-
-    @media (min-width: $desktop) {
-      font-size: 3.5rem;
-      width: 80px;
-      height: 80px;
-    }
-  }
-
-  &__sport-info {
-    flex: 1;
-    min-width: 0;
   }
 
   &__sport-name {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: $dark-purple;
-    margin-bottom: 0.25rem;
-
-    @media (min-width: $tablet) {
-      font-size: 1.625rem;
-    }
-
-    @media (min-width: $desktop) {
-      font-size: 1.75rem;
-    }
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: $text;
+    margin-bottom: 0.2rem;
   }
 
   &__sport-level {
-    font-size: 1rem;
-    color: $accent-purple;
-    font-weight: 600;
-
-    @media (min-width: $tablet) {
-      font-size: 1.0625rem;
-    }
-
-    @media (min-width: $desktop) {
-      font-size: 1.125rem;
-    }
+    font-size: 0.875rem;
+    color: $violet-light;
+    font-weight: 500;
   }
 
-  &__sports-description {
-    color: #475569;
+  &__sport-desc {
     font-size: 0.9375rem;
-    line-height: 1.6;
+    line-height: 1.7;
+    color: $muted;
     font-style: italic;
-    padding: 1rem;
-    background: $off-white;
-    border-radius: 0.75rem;
-    position: relative;
-    padding-left: 1.5rem;
+  }
 
-    @media (min-width: $tablet) {
-      font-size: 1rem;
-      line-height: 1.65;
-      padding: 1.125rem;
-      padding-left: 1.625rem;
-    }
+  // ─── CONTACT ─────────────────────────────────────────────────────────────
 
-    @media (min-width: $desktop) {
-      font-size: 1.0625rem;
-      line-height: 1.7;
-      padding: 1.25rem;
-      padding-left: 1.75rem;
-    }
+  &__contact {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2.5rem;
+    padding-top: 4rem;
+    border-top: 1px solid rgba($dim, 0.6);
 
-    &::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      background: linear-gradient(180deg, $primary-purple, $pink);
-      border-radius: 4px;
+    @media (max-width: $tablet) {
+      flex-direction: column;
     }
   }
 
-  // CONTACT
-  &__contact-wrapper {
-    text-align: center;
+  &__contact-left {
+    flex: 1;
   }
 
-  &__contact-text {
-    color: rgba(255, 255, 255, 0.95);
+  &__contact-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    color: $text;
+    margin-bottom: 1rem;
+  }
+
+  &__contact-sub {
     font-size: 1rem;
-    margin-bottom: 1.25rem;
-    line-height: 1.6;
-
-    @media (min-width: $tablet) {
-      font-size: 1.0625rem;
-      margin-bottom: 1.5rem;
-    }
-
-    @media (min-width: $desktop) {
-      font-size: 1.125rem;
-    }
-  }
-
-  &__contact-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    color: white;
-    font-size: 1rem;
-    font-weight: 600;
-    text-decoration: none;
-    padding: 0.875rem 1.25rem;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 1rem;
-    transition: all 0.3s ease;
-    word-break: break-all;
-    max-width: 100%;
-
-    @media (min-width: $mobile) {
-      font-size: 1.0625rem;
-      padding: 0.9375rem 1.5rem;
-      word-break: normal;
-    }
-
-    @media (min-width: $tablet) {
-      gap: 1rem;
-      font-size: 1.125rem;
-      padding: 1rem 1.75rem;
-    }
-
-    @media (min-width: $desktop) {
-      font-size: 1.25rem;
-      padding: 1rem 2rem;
-    }
-
-    &:hover {
-      background: white;
-      color: $primary-purple;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
-
-      svg {
-        color: $primary-purple;
-      }
-    }
-
-    svg {
-      transition: color 0.3s ease;
-      flex-shrink: 0;
-    }
-  }
-
-  &__contact-icon {
-    flex-shrink: 0;
+    line-height: 1.7;
+    color: $muted;
+    max-width: 36ch;
+    margin-bottom: 1.5rem;
   }
 
   &__contact-email {
-    word-break: break-all;
-    
-    @media (min-width: $mobile) {
-      word-break: normal;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: $violet-light;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    svg { flex-shrink: 0; }
+
+    &:hover {
+      color: $violet-pale;
     }
   }
 
-  // FOOTER
+  &__contact-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    flex-shrink: 0;
+
+    @media (max-width: $tablet) {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  // ─── BUTTONS ─────────────────────────────────────────────────────────────
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    padding: 0.875rem 2rem;
+    border-radius: 0.875rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+    white-space: nowrap;
+
+    &--linkedin {
+      background: #0077b5;
+      color: #fff;
+      box-shadow: 0 6px 24px rgba(0, 119, 181, 0.28);
+
+      &:hover {
+        background: #0065a0;
+      }
+    }
+
+    &--github {
+      background: #f0f0f0;
+      color: #111;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+
+      &:hover {
+        background: #fff;
+      }
+    }
+  }
+
+  // ─── FOOTER ──────────────────────────────────────────────────────────────
+
   &__footer {
-    text-align: center;
-    padding: 1.5rem 0 0;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 3rem;
+    font-size: 0.8125rem;
+    color: $dim;
+  }
 
-    @media (min-width: $tablet) {
-      padding: 2rem 0 0;
-      font-size: 0.9375rem;
-    }
+  &__footer-sep {
+    opacity: 0.5;
   }
 }
 
-// ANIMATIONS
-@keyframes float {
-  0%, 100% {
-    transform: translate(0, 0);
-  }
-  33% {
-    transform: translate(30px, -30px);
-  }
-  66% {
-    transform: translate(-20px, 20px);
-  }
-}
+// ─── ANIMATIONS ──────────────────────────────────────────────────────────────
 
-@keyframes gradient-rotate {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-  25% {
-    background-position: 50% 100%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  75% {
-    background-position: 50% 0%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 0.8; transform: scale(1.04); }
 }

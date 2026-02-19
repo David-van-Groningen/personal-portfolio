@@ -1,11 +1,11 @@
-import { Github, Linkedin, Mail, Code2, Gamepad2, Target } from 'lucide-react';
+import { Github, Linkedin, Mail, Code2, Gamepad2 } from 'lucide-react';
 
 export default function Portfolio() {
   const traits = [
-    "Vriendelijk", "Analytisch", "Sportief", "Creatief",
-    "Strategisch", "Loyaal", "Geduldig", "Betrouwbaar",
-    "Punctueel", "Verantwoordelijk", "Nauwkeurig", "Reflectief",
-    "Gestructureerd"
+    "Friendly", "Analytical", "Athletic", "Creative",
+    "Strategic", "Loyal", "Patient", "Reliable",
+    "Punctual", "Responsible", "Precise", "Reflective",
+    "Structured"
   ];
 
   const games = [
@@ -16,157 +16,147 @@ export default function Portfolio() {
     "Nintendo Switch Sports"
   ];
 
-  const sports = [
-    { name: "Badminton", icon: "🏸", level: "Enthousiast" }
-  ];
-
   return (
     <div className="portfolio">
-      <div className="portfolio__background">
-        <div className="portfolio__orb portfolio__orb--1"></div>
-        <div className="portfolio__orb portfolio__orb--2"></div>
-        <div className="portfolio__orb portfolio__orb--3"></div>
-      </div>
+      <div className="portfolio__noise"></div>
+
+      <div className="portfolio__grid-bg"></div>
 
       <div className="portfolio__container">
-        <div className="portfolio__card">
-          <div className="portfolio__header">
-            <div className="portfolio__avatar-wrapper">
-              <div className="portfolio__avatar">
-                <img 
-                  src="/profilepicture.jpg"
-                  alt="David van Groningen" 
-                  className="portfolio__avatar-img"
-                />
-                <div className="portfolio__avatar-ring"></div>
-              </div>
-            </div>
-            
-            <div className="portfolio__header-content">
-              <div className="portfolio__name-wrapper">
-                <h1 className="portfolio__name">David van Groningen</h1>
-                <div className="portfolio__title-badge">
-                  <Code2 size={20} className="portfolio__title-icon" />
-                  <span>Software Developer in Opleiding</span>
-                </div>
-              </div>
-              
-              <div className="portfolio__buttons">
-                <a
-                  href="https://www.linkedin.com/in/david-van-groningen/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="portfolio__button portfolio__button--linkedin"
-                >
-                  <Linkedin size={20} />
-                  <span>LinkedIn</span>
-                </a>
-                
-                <a
-                  href="https://github.com/David-van-Groningen"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="portfolio__button portfolio__button--github"
-                >
-                  <Github size={20} />
-                  <span>GitHub</span>
-                </a>
-              </div>
+
+        {/* HERO */}
+        <header className="portfolio__hero">
+          <div className="portfolio__hero-left">
+            <span className="portfolio__label">Portfolio</span>
+            <h1 className="portfolio__name">
+              <span className="portfolio__name-first">David</span>
+              <span className="portfolio__name-last">van Groningen</span>
+            </h1>
+            <div className="portfolio__role">
+              <Code2 size={16} />
+              <span>Software Developer in Training</span>
             </div>
           </div>
 
-          <section className="portfolio__section portfolio__section--about">
-            <div className="portfolio__section-header">
-              <Target size={28} className="portfolio__section-icon" />
-              <h2 className="portfolio__section-title">Over Mij</h2>
+          <div className="portfolio__hero-right">
+            <div className="portfolio__avatar">
+              <img
+                src="photo.jpg"
+                alt="David van Groningen"
+                className="portfolio__avatar-img"
+              />
+              <div className="portfolio__avatar-glow"></div>
             </div>
-            <div className="portfolio__section-content">
-              <p className="portfolio__intro">
-                Ik ben een <strong>leergierige Software Developer</strong> in opleiding met een passie voor het bouwen van slimme, 
-                schaalbare en gebruiksvriendelijke applicaties. Op dit moment richt ik me vooral op <strong>fullstack development</strong>.
-              </p>
-              <p>
-                Ik krijg energie van het oplossen van technische vraagstukken, samenwerken in een team en het bouwen 
-                van toepassingen die écht iets betekenen voor de gebruiker. Mijn ambitie is om te groeien in de IT – 
-                van fullstack development tot mogelijk ook <strong>datagedreven rollen</strong>.
-              </p>
-            </div>
-          </section>
+          </div>
+        </header>
 
-          <section className="portfolio__section">
-            <div className="portfolio__section-header">
-              <h2 className="portfolio__section-title">Eigenschappen</h2>
-            </div>
-            <div className="portfolio__traits">
-              {traits.map((trait, index) => (
-                <span key={index} className="portfolio__trait-badge">
-                  {trait}
-                </span>
+        {/* ABOUT */}
+        <section className="portfolio__about">
+          <div className="portfolio__about-marker">01</div>
+          <div className="portfolio__about-body">
+            <h2 className="portfolio__section-title">About</h2>
+            <p className="portfolio__about-lead">
+              I'm an <em>eager Software Developer</em> in training with a passion for building smart,
+              scalable and user-friendly applications. Right now I'm focusing on <em>fullstack development</em>.
+            </p>
+            <p className="portfolio__about-sub">
+              I get energy from solving technical challenges, collaborating in a team, and building
+              applications that genuinely make a difference for the user. My ambition is to grow in IT —
+              from fullstack development to potentially <em>data-driven roles</em>.
+            </p>
+          </div>
+        </section>
+
+        {/* TRAITS */}
+        <section className="portfolio__traits-section">
+          <div className="portfolio__traits-header">
+            <div className="portfolio__about-marker">02</div>
+            <h2 className="portfolio__section-title">Traits</h2>
+          </div>
+          <div className="portfolio__traits">
+            {traits.map((trait, index) => (
+              <span key={index} className="portfolio__trait">
+                {trait}
+              </span>
+            ))}
+          </div>
+        </section>
+
+        {/* GAMES + SPORTS */}
+        <div className="portfolio__columns">
+          <section className="portfolio__games">
+            <div className="portfolio__about-marker">03</div>
+            <h2 className="portfolio__section-title">
+              <Gamepad2 size={22} />
+              Favourite Games
+            </h2>
+            <ul className="portfolio__games-list">
+              {games.map((game, index) => (
+                <li key={index} className="portfolio__games-item">
+                  <span className="portfolio__games-num">0{index + 1}</span>
+                  <span>{game}</span>
+                </li>
               ))}
-            </div>
+            </ul>
           </section>
 
-          <div className="portfolio__grid">
-            <div className="portfolio__section portfolio__section--games">
-              <div className="portfolio__section-header">
-                <Gamepad2 size={28} className="portfolio__section-icon" />
-                <h2 className="portfolio__section-title">Favoriete Games</h2>
+          <section className="portfolio__sports">
+            <div className="portfolio__about-marker">04</div>
+            <h2 className="portfolio__section-title">Sport &amp; Hobbies</h2>
+            <div className="portfolio__sport-card">
+              <div className="portfolio__sport-icon">🏸</div>
+              <div>
+                <h3 className="portfolio__sport-name">Badminton</h3>
+                <p className="portfolio__sport-level">Enthusiast</p>
               </div>
-              <ul className="portfolio__list">
-                {games.map((game, index) => (
-                  <li key={index} className="portfolio__list-item">
-                    <span className="portfolio__list-icon">🎮</span>
-                    <span>{game}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
-
-            <div className="portfolio__section portfolio__section--sports">
-              <div className="portfolio__section-header">
-                <h2 className="portfolio__section-title">Sport &amp; Hobby&apos;s</h2>
-              </div>
-              <div className="portfolio__sports-grid">
-                {sports.map((sport, index) => (
-                  <div key={index} className="portfolio__sport-card">
-                    <div className="portfolio__sport-icon">{sport.icon}</div>
-                    <div className="portfolio__sport-info">
-                      <h3 className="portfolio__sport-name">{sport.name}</h3>
-                      <p className="portfolio__sport-level">{sport.level}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <p className="portfolio__sports-description">
-                Badminton geeft mij energie en helpt me om scherp te blijven. De snelheid en strategie van het spel 
-                vind ik geweldig – perfect voor het ontwikkelen van reactievermogen en doorzettingsvermogen.
-              </p>
-            </div>
-          </div>
-
-          <section className="portfolio__section portfolio__section--contact">
-            <div className="portfolio__section-header">
-              <Mail size={28} className="portfolio__section-icon" />
-              <h2 className="portfolio__section-title">Neem Contact Op</h2>
-            </div>
-            <div className="portfolio__contact-wrapper">
-              <p className="portfolio__contact-text">
-                Heb je een interessant project of wil je meer weten over mijn werk? 
-                Ik hoor graag van je!
-              </p>
-              <a
-                href="mailto:davidvangroningen29@gmail.com"
-                className="portfolio__contact-link"
-              >
-                <Mail size={20} className="portfolio__contact-icon" />
-                <span className="portfolio__contact-email">davidvangroningen29@gmail.com</span>
-              </a>
-            </div>
+            <p className="portfolio__sport-desc">
+              Badminton gives me energy and keeps me sharp. The speed and strategy of the game
+              are great for developing reflexes and perseverance.
+            </p>
           </section>
         </div>
 
+        {/* CONTACT */}
+        <section className="portfolio__contact">
+          <div className="portfolio__contact-left">
+            <div className="portfolio__about-marker">05</div>
+            <h2 className="portfolio__contact-title">Let's Connect</h2>
+            <p className="portfolio__contact-sub">
+              Have an interesting project or want to know more about my work?
+              I'd love to hear from you.
+            </p>
+            <a href="mailto:davidvangroningen29@gmail.com" className="portfolio__contact-email">
+              <Mail size={16} />
+              davidvangroningen29@gmail.com
+            </a>
+          </div>
+          <div className="portfolio__contact-right">
+            <a
+              href="https://www.linkedin.com/in/david-van-groningen/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="portfolio__btn portfolio__btn--linkedin"
+            >
+              <Linkedin size={18} />
+              <span>LinkedIn</span>
+            </a>
+            <a
+              href="https://github.com/David-van-Groningen"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="portfolio__btn portfolio__btn--github"
+            >
+              <Github size={18} />
+              <span>GitHub</span>
+            </a>
+          </div>
+        </section>
+
         <footer className="portfolio__footer">
-          <p>&copy; 2026 David van Groningen. Built with React &amp; SASS</p>
+          <span>© 2026 David van Groningen</span>
+          <span className="portfolio__footer-sep">·</span>
+          <span>Built with React &amp; SASS</span>
         </footer>
       </div>
     </div>
